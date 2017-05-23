@@ -1566,6 +1566,14 @@
     .param p7, "animate"    # Z
 
     .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/PhoneWindow$DecorView;->this$0:Lcom/android/internal/policy/PhoneWindow;
+
+    move/from16 v1, p4
+
+    invoke-static {p0, p1, v0, v1}, Lcom/android/internal/policy/PhoneWindow$FlymeInjector;->flymeGetDisplayMetricsHeight(Lcom/android/internal/policy/PhoneWindow$DecorView;Lcom/android/internal/policy/PhoneWindow$ColorViewState;Lcom/android/internal/policy/PhoneWindow;I)I
+
+    move-result p4
+
     if-lez p4, :cond_3
 
     iget v10, p1, Lcom/android/internal/policy/PhoneWindow$ColorViewState;->systemUiHideFlag:I
@@ -3399,6 +3407,18 @@
 
     .restart local v2    # "handled":Z
     :goto_2
+    invoke-static {p0, p1}, Lcom/android/internal/policy/PhoneWindow$FlymeInjector;->flymeDispatchKeyEvent(Lcom/android/internal/policy/PhoneWindow$DecorView;Landroid/view/KeyEvent;)Z
+
+    move-result v6
+
+    if-eqz v6, :cond_flyme_0
+
+    const/4 v6, 0x1
+
+    return v6
+
+    :cond_flyme_0
+
     if-eqz v2, :cond_5
 
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getKeyCode()I
@@ -5840,6 +5860,18 @@
     iget-object v2, p0, Lcom/android/internal/policy/PhoneWindow$DecorView;->mPrimaryActionMode:Landroid/view/ActionMode;
 
     if-eqz v2, :cond_1
+
+    invoke-static/range {p0 .. p1}, Lcom/android/internal/policy/PhoneWindow$FlymeInjector;->flymeSuperDispatchKeyEvent(Lcom/android/internal/policy/PhoneWindow$DecorView;Landroid/view/KeyEvent;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_flyme_0
+
+    const/4 v2, 0x1
+
+    return v2
+
+    :cond_flyme_0
 
     if-ne v0, v1, :cond_0
 
