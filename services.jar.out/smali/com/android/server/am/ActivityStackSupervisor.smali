@@ -114,6 +114,14 @@
 
 
 # instance fields
+.field mFlymeAccessControlManager:Lmeizu/security/AccessControlManager;
+
+.field mFlymePackageManagerService:Lcom/android/server/pm/FlymePackageManagerService;
+
+.field mFlymeRealPm:Lcom/android/server/pm/PackageManagerService;
+
+.field mIsIntercepted:Z
+
 .field inResumeTopActivity:Z
 
 .field public lBoostCpuParamVal:[I
@@ -541,7 +549,7 @@
 
     move-result-object v0
 
-    const v1, 0x11200a7
+    const v1, #android:bool@config_enableCpuBoostForAppLaunch#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -558,7 +566,7 @@
 
     move-result-object v0
 
-    const v1, 0x11200a8
+    const v1, #android:bool@config_disablePacking#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -580,7 +588,7 @@
 
     move-result-object v0
 
-    const v1, 0x10e0099
+    const v1, #android:integer@launchboost_timeout_param#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getInteger(I)I
 
@@ -597,7 +605,7 @@
 
     move-result-object v0
 
-    const v1, 0x1070048
+    const v1, #android:array@launchboost_param_value#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
@@ -620,7 +628,7 @@
 
     move-result-object v0
 
-    const v1, 0x10e009a
+    const v1, #android:integer@disablepacking_timeout_param#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getInteger(I)I
 
@@ -637,7 +645,7 @@
 
     move-result-object v0
 
-    const v1, 0x1070049
+    const v1, #android:array@launchboost_packing_param_value#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
@@ -11366,7 +11374,6 @@
     .param p5, "userId"    # I
 
     .prologue
-    .line 916
     const/4 v3, 0x0
 
     move-object v0, p0
@@ -14985,6 +14992,27 @@
     move-result-object v30
 
     .local v30, "aInfo":Landroid/content/pm/ActivityInfo;
+
+    move-object/from16 v0, p0
+
+    move/from16 v1, p2
+
+    move-object/from16 v2, p3
+
+    move-object/from16 v4, v30
+
+    invoke-static {v0, v1, v2, v4}, Lcom/android/server/am/ActivityStackSupervisor$FlymeInjector;->changeMayInterceptPackage(Lcom/android/server/am/ActivityStackSupervisor;ILjava/lang/String;Landroid/content/pm/ActivityInfo;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    const/4 v0, 0x0
+
+    return v0
+
+    :cond_flyme_0
+
     move-object/from16 v28, p18
 
     .line 1045
@@ -19959,5 +19987,15 @@
     .end local v5    # "stackNdx":I
     .end local v6    # "stacks":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lcom/android/server/am/ActivityStack;>;"
     :cond_8
+    return-void
+.end method
+
+.method setPackageManager(Lcom/android/server/pm/PackageManagerService;)V
+    .locals 0
+    .param p1, "pm"    # Lcom/android/server/pm/PackageManagerService;
+
+    .prologue
+    iput-object p1, p0, Lcom/android/server/am/ActivityStackSupervisor;->mFlymeRealPm:Lcom/android/server/pm/PackageManagerService;
+
     return-void
 .end method

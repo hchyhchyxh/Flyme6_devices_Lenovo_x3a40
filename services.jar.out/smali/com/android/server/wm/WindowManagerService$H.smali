@@ -112,20 +112,25 @@
     .param p1, "msg"    # Landroid/os/Message;
 
     .prologue
-    .line 7908
     move-object/from16 v0, p1
 
     iget v2, v0, Landroid/os/Message;->what:I
 
     packed-switch v2, :pswitch_data_0
 
-    .line 8446
     :cond_0
     :goto_0
     :pswitch_0
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/server/wm/WindowManagerService$H;->this$0:Lcom/android/server/wm/WindowManagerService;
+
+    move-object/from16 v0, p1
+
+    invoke-static {v2, v0}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->handleFlymeMessage(Lcom/android/server/wm/WindowManagerService;Landroid/os/Message;)V
+
     return-void
 
-    .line 7914
     :pswitch_1
     move-object/from16 v0, p1
 
