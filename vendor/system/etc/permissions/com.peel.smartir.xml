@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 Peel Technologies Inc.
+-->
+
+<!-- This is a feature that enables IR transmit and
+     IR receive. -->
+<permissions>
+    <feature name="com.peel.smartir" />
+</permissions>

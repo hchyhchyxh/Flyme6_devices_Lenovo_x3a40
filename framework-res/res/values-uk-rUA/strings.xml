@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="month_day_year" formatted="false">%-e %B %Y р.</string>
+    <string name="time_of_day" formatted="false">%H:%M:%S</string>
+    <string name="date_and_time" formatted="false">%-e %b %Y р., %H:%M:%S</string>
+    <string name="date_time">%1$s, %2$s</string>
+    <string name="numeric_date_template" formatted="false">%s.%s.%s</string>
+    <string name="font_family_display_4_material">sans-serif-condensed-light</string>
+    <string name="font_family_display_3_material">sans-serif-condensed</string>
+    <string name="font_family_display_2_material">sans-serif-condensed</string>
+    <string name="font_family_display_1_material">sans-serif-condensed</string>
+    <string name="font_family_headline_material">sans-serif-condensed</string>
+    <string name="font_family_title_material">sans-serif-condensed</string>
+    <string name="font_family_subhead_material">sans-serif-condensed</string>
+    <string name="font_family_menu_material">sans-serif-condensed</string>
+    <string name="font_family_body_2_material">sans-serif-condensed</string>
+    <string name="font_family_body_1_material">sans-serif-condensed</string>
+    <string name="font_family_caption_material">sans-serif-condensed</string>
+    <string name="font_family_button_material">sans-serif-condensed</string>
+</resources>
